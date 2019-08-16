@@ -16,7 +16,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # Get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('\nWhich city you would like to explore, Chicago, New York, or Washington?\n').lower()
     while(True):
 
@@ -25,7 +25,7 @@ def get_filters():
         else:
             city = input('Enter Correct city: ').lower()
 
-    # get user input for month (all, january, february, ... , june)
+    # Get user input for month (all, january, february, ... , june)
     month = input('\nFor which month? January, February, March, April, May, or June?\n').lower()
 
     while(True):
@@ -33,7 +33,7 @@ def get_filters():
             break
         else:
             month = input('Enter a valid month\n').lower()
-    # get user input for day of week (all, monday, tuesday, ... sunday)
+    # Get user input for day of week (all, monday, tuesday, ... sunday)
     day =  input('Which day ? monday, tuesday, wednesday, thursday, friday, saturday , sunday or all to display data of all days?\n').lower()
 
     while(True):
@@ -74,7 +74,7 @@ def load_data(city, month, day):
         df = df[df['Start Time'].dt.month == month]
     """New DataFrame that contains old DataFrame with month = selected month"""
 
-    #filter data by day of the week
+    #Filter data by day of the week
     if day != 'all':
         df = df[df['Start Time'].dt.weekday_name == day.title()]
      #print 5 rows.
@@ -88,17 +88,17 @@ def time_stats(df, month, day):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    # display the most common month
+    # Display the most common month
     if(month == 'all'):
         most_common_month = df['Start Time'].dt.month.value_counts().idxmax()
         print('Most common month is ' + str(most_common_month))
 
-    # display the most common day of week
+    # Display the most common day of week
     if(day == 'all'):
         most_common_day = df['Start Time'].dt.weekday_name.value_counts().idxmax()
         print('Most common day is ' + str(most_common_day))
 
-    # display the most common start hour
+    # Display the most common start hour
     most_common_hour = df['Start Time'].dt.hour.value_counts().idxmax()
     print('Most popular hour is ' + str(most_common_hour))
 
@@ -112,15 +112,15 @@ def station_stats(df):
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
-    # display most commonly used start station
+    # Display most commonly used start station
     most_common_start_station = df['Start Station'].mode()[0]
     print('\nMost common start station is {}\n'.format(most_common_start_station))
 
-    # display most commonly used end station
+    # Display most commonly used end station
     most_common_end_station = df['End Station'].mode()[0]
     print('\nMost common end station is {}\n'.format(most_common_end_station))
 
-    # display most frequent combination of start station and end station trip
+    # Display most frequent combination of start station and end station trip
     combination_trip = df['Start Station'].astype(str) + " to " + df['End Station'].astype(str)
     most_frequent_trip = combination_trip.value_counts().idxmax()
     print('\nMost popular trip is from {}\n'.format(most_frequent_trip))
@@ -135,11 +135,11 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # display total travel time
+    # Display total travel time
     total_travel_time = df['Trip Duration'].sum()
     print("Total travel time is %s in seconds" %(total_travel_time))
 
-    # display mean travel time
+    # Display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
     print("Mean travel time is %s in seconds" %(mean_travel_time))
 
